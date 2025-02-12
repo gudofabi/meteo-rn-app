@@ -32,6 +32,21 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Alata-Regular.ttf",
+            "./assets/fonts/SpaceMono-Regular.ttf"
+          ]
+        }
       ]
     ],
     "experiments": {

@@ -1,4 +1,4 @@
-import { useNavigation } from "expo-router";
+import { Link, useNavigation } from "expo-router";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
 import { s } from "./Home.style";
@@ -13,13 +13,8 @@ interface props {
 }
 
 export default function Home({ weather, city }: props) {
-  const nav = useNavigation();
   const currentWeather = weather.current_weather;
   const currentInter = getWeatherInter(currentWeather.weathercode);
-
-  useEffect(() => {
-    nav.setOptions({ headerShown: false });
-  }, [nav]);
 
   return (
     <>
@@ -32,6 +27,7 @@ export default function Home({ weather, city }: props) {
       </View>
       <View style={s.searhbar_container}>
         <Title>Search Bar</Title>
+        <Link href="/forecasts">Forecasts</Link>
       </View>
       <View style={s.meteo_adv}>
         <MeteoAdvanced

@@ -4,12 +4,11 @@ import {
 } from "expo-location";
 import { useEffect, useState } from "react";
 
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { ImageBackground, SafeAreaView, Text, View } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
 import Home from "@/pages/Home/Home";
 
 import { s } from "./index.style";
-import { useFonts } from "expo-font";
 
 import backgroundImg from "../assets/images/background.png";
 import { MeteoAPI } from "@/api/meteo";
@@ -18,10 +17,6 @@ export default function Index() {
   const [coordinates, setCoordinates] = useState();
   const [weather, setWeather] = useState();
   const [city, setCity] = useState();
-
-  const [isFontLoaded] = useFonts({
-    "Alata-Regular": require("../assets/fonts/Alata-Regular.ttf"),
-  });
 
   useEffect(() => {
     func_getUserCoordinates();
@@ -63,14 +58,8 @@ export default function Index() {
   console.log(city);
 
   return (
-    <ImageBackground imageStyle={s.img} source={backgroundImg} style={s.bgImg}>
-      <SafeAreaProvider>
-        <SafeAreaView style={s.container}>
-          {isFontLoaded && weather && city && (
-            <Home weather={weather} city={city} />
-          )}
-        </SafeAreaView>
-      </SafeAreaProvider>
-    </ImageBackground>
+    <View style={s.container}>
+      {weather && city && <Home weather={weather} city={city} />}
+    </View>
   );
 }

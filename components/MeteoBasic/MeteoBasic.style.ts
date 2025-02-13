@@ -10,7 +10,8 @@ export const s = StyleSheet.create({
     transform: [{ rotate: "-90deg" }],
   },
   inter_txt: {
-    fontSize: 20,
+    fontSize: 18,
+    marginTop: 10,
   },
   temp_box: {
     flexDirection: "row",

@@ -3,15 +3,14 @@ import {
   getCurrentPositionAsync,
 } from "expo-location";
 import { useEffect, useState } from "react";
+import { MeteoAPI } from "@/api/meteo";
 
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { View } from "react-native";
+// components
 import Home from "@/pages/Home/Home";
+import { Alert, View } from "react-native";
+import { Title } from "@/components/Title/Title";
 
 import { s } from "./index.style";
-
-import backgroundImg from "../assets/images/background.png";
-import { MeteoAPI } from "@/api/meteo";
 
 export default function Index() {
   const [coordinates, setCoordinates] = useState();
@@ -39,6 +38,15 @@ export default function Index() {
     setCity(cityRes);
   };
 
+  const func_fetchCoodsByCity = async (city: String) => {
+    try {
+      const coordsRes = await MeteoAPI.fetchCoodsByCity(city);
+      setCoordinates(coordsRes as any);
+    } catch (error: any) {
+      Alert.alert("Ouch! ", error);
+    }
+  };
+
   const func_getUserCoordinates = async () => {
     const { status } = await requestForegroundPermissionsAsync();
     if (status === "granted") {
@@ -59,7 +67,15 @@ export default function Index() {
 
   return (
     <View style={s.container}>
-      {weather && city && <Home weather={weather} city={city} />}
+      {weather && city ? (
+        <Home
+          weather={weather}
+          city={city}
+          onSubmitSearch={func_fetchCoodsByCity}
+        />
+      ) : (
+        <Title style={s.loading}>Loading...</Title>
+      )}
     </View>
   );
 }

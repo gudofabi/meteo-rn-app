@@ -4,6 +4,7 @@ import { ImageBackground } from "react-native";
 import { useFonts } from "expo-font";
 
 import backgroundImg from "../assets/images/background.png";
+import { Title } from "@/components/Title/Title";
 
 export default function RootLayout() {
   const [isFontLoaded] = useFonts({

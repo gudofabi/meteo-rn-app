@@ -12,4 +12,7 @@ export const s = StyleSheet.create({
   container: {
     flex: 1,
   },
+  loading: {
+    textAlign: "center",
+  },
 });
